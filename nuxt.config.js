@@ -1,3 +1,4 @@
+require('dotenv').config()
 
 export default {
   mode: 'spa',
@@ -28,6 +29,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/csrfToken.js' }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -50,6 +52,8 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    credentials: true,
+    baseURL: process.env.SPA_PRACTICE_APP_BASE_URL
   },
   /*
   ** Build configuration
@@ -60,5 +64,11 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  /**
+   * router
+   */
+  router: {
+    middleware: ['auth']
   }
 }
